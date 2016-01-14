@@ -4010,6 +4010,38 @@ public final class Settings {
         public static final String  RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
 
         /**
+         * Which applications to disable heads up notifications for
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_BLACKLIST_VALUES = "heads_up_blacklist_values";
+
+        /**
+         * Whether to show the notification ticker on the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_SHOW_TICKER = "status_bar_show_ticker";
+
+        /**
+         * Volume rocker wake
+         * @hide
+         */
+        public static final String VOLUME_ROCKER_WAKE = "volume_rocker_wake";
+
+        /**
+         * Change volume up and down handlign based on rotation
+         * @hide
+         */
+        public static final String SWAP_VOLUME_BUTTONS = "swap_volume_buttons";
+
+        /**
+         * whether to enable or disable vibration on succesful fingerprint auth
+         *
+         * @hide
+         */
+        public static final String FINGERPRINT_SUCCESS_VIB = "fingerprint_success_vib";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
