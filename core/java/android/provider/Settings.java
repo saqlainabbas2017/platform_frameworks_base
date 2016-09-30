@@ -7100,6 +7100,13 @@ public final class Settings {
          */
         public static final String ADB_PORT = "adb_port";
 
+	/**
+         * battery saver color
+         *
+         * @hide
+         */
+        public static final String STATUS_BAR_BATTERY_SAVER_COLOR = "status_bar_battery_saver_color";
+
         /**
          * This are the settings to be backed up.
          *
