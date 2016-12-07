@@ -13,14 +13,10 @@
 -->
 <resources>
 
-    <!-- Floating action button -->
-    <dimen name="floating_action_button_translation_z">12dp</dimen>
-<<<<<<< HEAD:packages/SystemUI/res/values/colt_dimens.xml
+    <color name="system_primary_color">@*android:color/primary_material_light</color>
+    <color name="system_accent_color">@*android:color/material_deep_teal_700</color>
 
-=======
-    <dimen name="floating_action_button_height">54dp</dimen>
-    <dimen name="floating_action_button_width">54dp</dimen>
-    <dimen name="floating_action_button_margin_side">32dp</dimen>
-    <dimen name="floating_action_button_margin_bottom">46dp</dimen>
->>>>>>> 0d37793... Add Clear All Button to Recents [1/2]:packages/SystemUI/res/values/aicp_dimens.xml
+    <!-- Floating action button -->
+    <color name="fab_color">@*android:color/accent_device_default_light</color>
+    <color name="floating_action_button_icon_color">@android:color/white</color>
 </resources>
