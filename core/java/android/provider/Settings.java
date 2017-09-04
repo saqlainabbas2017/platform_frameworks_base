@@ -4036,6 +4036,42 @@ public final class Settings {
         */
        public static final String LOCKSCREEN_MEDIA_METADATA = "lockscreen_media_metadata";
 
+	/**
+        * Whether to show battery light when DND mode is active
+        * @hide
+        */
+       public static final String BATTERY_LIGHT_ALLOW_ON_DND = "battery_light_allow_on_dnd";
+
+        /**
+        * Whether to show blinking light when battery is low
+        * @hide
+        */
+       public static final String BATTERY_LIGHT_LOW_BLINKING = "battery_light_low_blinking";
+
+        /**
+        * Low battery charging color
+        * @hide
+        */
+       public static final String BATTERY_LIGHT_LOW_COLOR = "battery_light_low_color";
+
+        /**
+        * Medium battery charging color
+        * @hide
+        */
+       public static final String BATTERY_LIGHT_MEDIUM_COLOR = "battery_light_medium_color";
+
+        /**
+        * Full battery charging color
+        * @hide
+        */
+       public static final String BATTERY_LIGHT_FULL_COLOR = "battery_light_full_color";
+
+        /**
+        * Really full 100 battery charging color
+        * @hide
+        */
+       public static final String BATTERY_LIGHT_REALLYFULL_COLOR = "battery_light_reallyfull_color";
+
         /**
          * Toast icon
          * @hide
@@ -4367,6 +4403,12 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(STATUS_BAR_QUICK_QS_PULLDOWN);
             PRIVATE_SETTINGS.add(LOCKSCREEN_MEDIA_METADATA);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_ALLOW_ON_DND);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_LOW_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_MEDIUM_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_FULL_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_REALLYFULL_COLOR);
+            PRIVATE_SETTINGS.add(BATTERY_LIGHT_LOW_BLINKING);
             PRIVATE_SETTINGS.add(TOAST_ICON);
             PRIVATE_SETTINGS.add(QS_ROWS_PORTRAIT);
             PRIVATE_SETTINGS.add(QS_ROWS_LANDSCAPE);
