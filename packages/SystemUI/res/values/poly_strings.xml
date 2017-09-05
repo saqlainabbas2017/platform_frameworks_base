@@ -74,4 +74,25 @@
      <string name="accessibility_quick_settings_location_gps_only">Location reporting: sensors only mode.</string>
      <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
 
+     <string name="kb_left">Keyboard left cursor</string>
+     <string name="kb_right">Keyboard right cursor</string>
+
+    <!-- SysUI Tuner: Labels for different types of navigation bar buttons [CHAR LIMIT=60] -->
+    <string-array name="nav_bar_buttons_validus">
+        <item>Keyboard left cursor</item>
+        <item>Keyboard right cursor</item>
+        <item>Clipboard</item>
+        <item>Keycode</item>
+        <item>Keyboard switcher</item>
+        <item>None</item>
+    </string-array>
+    <string-array name="nav_bar_button_values_validus" translatable="false">
+        <item>kb_left</item>
+        <item>kb_right</item>
+        <item>clipboard</item>
+        <item>key</item>
+        <item>menu_ime</item>
+        <item>space</item>
+    </string-array>
+
 </resources>
