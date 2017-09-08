@@ -96,5 +96,6 @@
     </string-array>
 
 <string name="summary_empty" translatable="false"></string>
+    <string name="statusbar_items_title">Statusbar icon</string>
 
 </resources>
