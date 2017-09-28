@@ -24,4 +24,7 @@
 
     <string name="summary_empty" translatable="false"></string>
 
+    <!-- Screenshoot tile -->
+    <string name="quick_settings_screenshot_label">Screenshot</string>
+
 </resources>
