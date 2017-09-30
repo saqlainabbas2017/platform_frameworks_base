@@ -990,9 +990,6 @@ public class PhoneWindowManager implements WindowManagerPolicy {
                     Settings.Global.POLICY_CONTROL), false, this,
                     UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
-                    Settings.Secure.TORCH_POWER_BUTTON_GESTURE), false, this,
-                    UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.LOCK_POWER_MENU_DISABLED), false, this,
                     UserHandle.USER_ALL);
 
