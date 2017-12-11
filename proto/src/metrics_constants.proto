@@ -3979,5 +3979,8 @@ message MetricsEvent {
 
     // GZOSP custom constants
     GZOSP = 1500;
+
+    //PolyOS constants
+    POLY = 420;
   }
 }
