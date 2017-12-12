@@ -4573,9 +4573,9 @@ message MetricsEvent {
     // END OF AOSP CONSTANTS
 
     // Quick Settings tiles
-    CUSTOM_QUICK_TILES = 421
+    CUSTOM_QUICK_TILES = 421;
 
     //PolyLabs
-    POLY = 420
+    POLY = 420;
   }
 }
