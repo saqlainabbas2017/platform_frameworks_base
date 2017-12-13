@@ -2,7 +2,7 @@
  * Copyright (C) 2014 The Android Open Source Project
  * Copyright (C) 2012-2015 The CyanogenMod Project
  * Copyright 2014-2015 The Euphoria-OS Project
- * Copyright 2017 ColtOS
+ * Copyright 2017 PolyOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public class ScreenshotTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.COLT;
+        return MetricsEvent.POLY;
     }
 
     final Runnable mScreenshotTimeout = new Runnable() {
