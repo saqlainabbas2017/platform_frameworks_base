@@ -120,9 +120,6 @@ import dalvik.system.VMRuntime;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -737,9 +734,6 @@ public final class SystemServer {
         if (Build.IS_DEBUGGABLE && SystemProperties.getBoolean("debug.crash_system", false)) {
             throw new RuntimeException();
         }
-
-        String externalServer = context.getResources().getString(
-                org.lineageos.platform.internal.R.string.config_externalSystemServer);
 
         try {
             final String SECONDARY_ZYGOTE_PRELOAD = "SecondaryZygotePreload";
@@ -1577,24 +1571,6 @@ public final class SystemServer {
             traceBeginAndSlog("StartAutoFillService");
             mSystemServiceManager.startService(AUTO_FILL_MANAGER_SERVICE_CLASS);
             traceEnd();
-        }
-
-        final Class<?> serverClazz;
-        try {
-            serverClazz = Class.forName(externalServer);
-            final Constructor<?> constructor = serverClazz.getDeclaredConstructor(Context.class);
-            constructor.setAccessible(true);
-            final Object baseObject = constructor.newInstance(mSystemContext);
-            final Method method = baseObject.getClass().getDeclaredMethod("run");
-            method.setAccessible(true);
-            method.invoke(baseObject);
-        } catch (ClassNotFoundException
-                | IllegalAccessException
-                | InvocationTargetException
-                | InstantiationException
-                | NoSuchMethodException e) {
-            Slog.wtf(TAG, "Unable to start  " + externalServer);
-            Slog.wtf(TAG, e);
         }
 
         // It is now time to start up the app processes...
