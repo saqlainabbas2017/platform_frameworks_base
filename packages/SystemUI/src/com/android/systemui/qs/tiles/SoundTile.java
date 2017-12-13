@@ -124,7 +124,7 @@ public class SoundTile extends QSTileImpl<State> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.COLT;
+        return MetricsEvent.POLY;
     }
 
     @Override

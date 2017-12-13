@@ -1,6 +1,6 @@
 /*
  * Copyright (C) 2013 Slimroms
- *               2017 ColtOS
+ *               2017 PolyOS
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ public class RebootTile extends QSTileImpl<BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return MetricsEvent.COLT;
+        return MetricsEvent.POLY;
     }
 
     @Override
