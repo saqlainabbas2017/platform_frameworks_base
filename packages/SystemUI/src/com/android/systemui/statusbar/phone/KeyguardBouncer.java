@@ -40,8 +40,6 @@ import com.android.systemui.DejankUtils;
 import com.android.systemui.classifier.FalsingManager;
 import com.android.systemui.keyguard.DismissCallbackRegistry;
 
-import org.lineageos.internal.util.LineageLockPatternUtils;
-
 import static com.android.keyguard.KeyguardHostView.OnDismissAction;
 import static com.android.keyguard.KeyguardSecurityModel.SecurityMode;
 
@@ -55,16 +53,10 @@ public class KeyguardBouncer {
     protected final Context mContext;
     protected final ViewMediatorCallback mCallback;
     protected final LockPatternUtils mLockPatternUtils;
-    private final LineageLockPatternUtils mLineageLockPatternUtils;
     protected final ViewGroup mContainer;
     private final FalsingManager mFalsingManager;
     private final DismissCallbackRegistry mDismissCallbackRegistry;
     private final Handler mHandler;
-
-    public static final int UNLOCK_SEQUENCE_DEFAULT = 0;
-    public static final int UNLOCK_SEQUENCE_BOUNCER_FIRST = 1;
-    public static final int UNLOCK_SEQUENCE_FORCE_BOUNCER = 2;
-
     protected KeyguardHostView mKeyguardView;
     protected ViewGroup mRoot;
     private boolean mShowingSoon;
@@ -89,7 +81,6 @@ public class KeyguardBouncer {
         mFalsingManager = FalsingManager.getInstance(mContext);
         mDismissCallbackRegistry = dismissCallbackRegistry;
         mHandler = new Handler();
-        mLineageLockPatternUtils = new LineageLockPatternUtils(mContext);
     }
 
     public void show(boolean resetSecuritySelection) {
@@ -272,44 +263,28 @@ public class KeyguardBouncer {
     }
 
     /**
-     * @return Whether the bouncer should be shown first, this could be because of SIM PIN/PUK
-     * or it just could be chosen to be shown first.
+     * @return True if and only if the security method should be shown before showing the
+     * notifications on Keyguard, like SIM PIN/PUK.
      */
-    public int needsFullscreenBouncer() {
+    public boolean needsFullscreenBouncer() {
         ensureView();
         if (mKeyguardView != null) {
             SecurityMode mode = mKeyguardView.getSecurityMode();
-            if (mode == SecurityMode.SimPin || mode == SecurityMode.SimPuk) {
-                return UNLOCK_SEQUENCE_FORCE_BOUNCER;
-            } else if ((mode == SecurityMode.Pattern || mode == SecurityMode.Password
-                    || mode == SecurityMode.PIN) && (mLockPatternUtils != null
-                    && mLineageLockPatternUtils.shouldPassToSecurityView(
-                            KeyguardUpdateMonitor.getCurrentUser()))) {
-                // "Bouncer first" mode is only available to some security methods
-                return UNLOCK_SEQUENCE_BOUNCER_FIRST;
-            }
+            return mode == SecurityMode.SimPin || mode == SecurityMode.SimPuk;
         }
-        return UNLOCK_SEQUENCE_DEFAULT;
+        return false;
     }
 
     /**
      * Like {@link #needsFullscreenBouncer}, but uses the currently visible security method, which
      * makes this method much faster.
      */
-    public int isFullscreenBouncer() {
+    public boolean isFullscreenBouncer() {
         if (mKeyguardView != null) {
             SecurityMode mode = mKeyguardView.getCurrentSecurityMode();
-            if (mode == SecurityMode.SimPin || mode == SecurityMode.SimPuk) {
-                return UNLOCK_SEQUENCE_FORCE_BOUNCER;
-            } else if ((mode == SecurityMode.Pattern || mode == SecurityMode.Password
-                    || mode == SecurityMode.PIN) && (mLockPatternUtils != null
-                    && mLineageLockPatternUtils.shouldPassToSecurityView(
-                            KeyguardUpdateMonitor.getCurrentUser()))) {
-                // "Bouncer first" mode is only available to some security methods
-                return UNLOCK_SEQUENCE_BOUNCER_FIRST;
-            }
+            return mode == SecurityMode.SimPin || mode == SecurityMode.SimPuk;
         }
-        return UNLOCK_SEQUENCE_DEFAULT;
+        return false;
     }
 
     /**

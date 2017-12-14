@@ -151,37 +151,18 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
      * Shows the notification keyguard or the bouncer depending on
      * {@link KeyguardBouncer#needsFullscreenBouncer()}.
      */
-    protected void showBouncerOrKeyguard(boolean hideBouncerWhenShowing, boolean isBackPressed) {
-        switch (mBouncer.needsFullscreenBouncer()) {
-            case KeyguardBouncer.UNLOCK_SEQUENCE_FORCE_BOUNCER:
-                // SIM PIN/PUK
-                // The keyguard might be showing (already). So we need to hide it.
-                mStatusBar.hideKeyguard();
-                mBouncer.show(true /* resetSecuritySelection */);
-                break;
-            case KeyguardBouncer.UNLOCK_SEQUENCE_BOUNCER_FIRST:
-                // Pattern / PIN / password with "Directly show " enabled
-                if (isBackPressed) {
-                    mStatusBar.showKeyguard();
-                    if (hideBouncerWhenShowing) {
-                        mBouncer.hide(false /* destroyView */);
-                        mBouncer.prepare();
-                    }
-                } else {
-                    // The keyguard might be showing (already). So we need to hide it.
-                    mStatusBar.hideKeyguard();
-                    mBouncer.show(true /* resetSecuritySelection */);
-                }
-                break;
-            case KeyguardBouncer.UNLOCK_SEQUENCE_DEFAULT:
-                mStatusBar.showKeyguard();
-                if (hideBouncerWhenShowing) {
-                    mBouncer.hide(false /* destroyView */);
-                    mBouncer.prepare();
-                }
-                break;
-            default:
-                break;
+    protected void showBouncerOrKeyguard(boolean hideBouncerWhenShowing) {
+        if (mBouncer.needsFullscreenBouncer()) {
+
+            // The keyguard might be showing (already). So we need to hide it.
+            mStatusBar.hideKeyguard();
+            mBouncer.show(true /* resetSecuritySelection */);
+        } else {
+            mStatusBar.showKeyguard();
+            if (hideBouncerWhenShowing) {
+                mBouncer.hide(false /* destroyView */);
+                mBouncer.prepare();
+            }
         }
     }
 
@@ -215,25 +196,18 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
     /**
      * Reset the state of the view.
      */
-    public void reset(boolean hideBouncerWhenShowing, boolean isBackPressed) {
+    public void reset(boolean hideBouncerWhenShowing) {
         if (mShowing) {
             if (mOccluded) {
                 mStatusBar.hideKeyguard();
                 mStatusBar.stopWaitingForKeyguardExit();
                 mBouncer.hide(false /* destroyView */);
             } else {
-                showBouncerOrKeyguard(hideBouncerWhenShowing, isBackPressed);
+                showBouncerOrKeyguard(hideBouncerWhenShowing);
             }
             KeyguardUpdateMonitor.getInstance(mContext).sendKeyguardReset();
             updateStates();
         }
-    }
-
-    /**
-     * Reset the state of the view; not caused by back press
-     */
-    public void reset(boolean hideBouncerWhenShowing) {
-        reset(hideBouncerWhenShowing, false);
     }
 
     public void onStartedGoingToSleep() {
@@ -518,7 +492,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
     public boolean onBackPressed() {
         if (mBouncer.isShowing()) {
             mStatusBar.endAffordanceLaunch();
-            reset(true /* hideBouncerWhenShowing */, true /* isBackPressed */);
+            reset(true /* hideBouncerWhenShowing */);
             return true;
         }
         return false;
@@ -551,8 +525,7 @@ public class StatusBarKeyguardViewManager implements RemoteInputController.Callb
         boolean showing = mShowing;
         boolean occluded = mOccluded;
         boolean bouncerShowing = mBouncer.isShowing();
-        boolean bouncerDismissible =
-                mBouncer.isFullscreenBouncer() != KeyguardBouncer.UNLOCK_SEQUENCE_FORCE_BOUNCER;
+        boolean bouncerDismissible = !mBouncer.isFullscreenBouncer();
         boolean remoteInputActive = mRemoteInputActive;
 
         if ((bouncerDismissible || !showing || remoteInputActive) !=
