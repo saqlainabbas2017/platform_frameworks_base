@@ -21,7 +21,7 @@
     <com.android.systemui.tuner.TunerSwitch
         android:key="qs_show_brightness"
         android:title="@string/show_brightness"
-        sysui:defValue="true" />
+        sysui:defValue="false" />
 
     <PreferenceScreen
         android:key="status_bar"
