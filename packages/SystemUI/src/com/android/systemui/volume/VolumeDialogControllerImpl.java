@@ -42,7 +42,6 @@ import android.os.RemoteException;
 import android.os.Vibrator;
 import android.provider.Settings;
 import android.service.notification.Condition;
-import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
@@ -113,7 +112,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     private boolean mDestroyed;
     private VolumePolicy mVolumePolicy;
     private boolean mShowDndTile = true;
-	private boolean mHasAlertSlider = false;
     @GuardedBy("this")
     private UserActivityListener mUserActivityListener;
 
@@ -137,9 +135,6 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
         mReceiver.init();
         mVibrator = (Vibrator) mContext.getSystemService(Context.VIBRATOR_SERVICE);
         mHasVibrator = mVibrator != null && mVibrator.hasVibrator();
-		mHasAlertSlider = mContext.getResources().getBoolean(com.android.internal.R.bool.config_hasAlertSlider)
-                && !TextUtils.isEmpty(mContext.getResources().getString(com.android.internal.R.string.alert_slider_state_path))
-                && !TextUtils.isEmpty(mContext.getResources().getString(com.android.internal.R.string.alert_slider_uevent_match_path));
         updateStatusBar();
 
         boolean accessibilityVolumeStreamActive = context.getSystemService(
@@ -185,7 +180,7 @@ public class VolumeDialogControllerImpl implements VolumeDialogController, Dumpa
     public void register() {
         setVolumeController();
         setVolumePolicy(mVolumePolicy);
-        showDndTile(mShowDndTile && !mHasAlertSlider);
+        showDndTile(mShowDndTile);
         try {
             mMediaSessions.init();
         } catch (SecurityException e) {
