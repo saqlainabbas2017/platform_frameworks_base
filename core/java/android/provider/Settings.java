@@ -7514,9 +7514,9 @@ public final class Settings {
          * 3: Set the brightness to a medium value
          * @hide
          */
+        public static final String NIGHT_BRIGHTNESS_VALUE = "night_brightness_value";
         
         /**
-        public static final String NIGHT_BRIGHTNESS_VALUE = "night_brightness_value";
          * Force authorize Substratum (or equivalent) frontend calling packages by ThemeInterfacer
          * The value is boolean (1 or 0).
          * @hide
